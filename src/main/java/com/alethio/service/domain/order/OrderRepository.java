@@ -1,4 +1,4 @@
-package com.alethio.service.repository.order;
+package com.alethio.service.domain.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

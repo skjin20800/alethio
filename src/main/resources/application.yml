@@ -4,4 +4,25 @@ spring:
     driver-class-name: org.h2.Driver
     username: alethio
     password: admin
+  
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
 
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+            
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
