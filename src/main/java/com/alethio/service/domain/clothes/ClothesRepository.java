@@ -1,11 +1,12 @@
 package com.alethio.service.domain.clothes;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.alethio.service.domain.item.ItemType;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ClothesRepository extends JpaRepository<Clothes, Long> {
 	
+
 	
-	Clothes findByTypeIdAndItemType(Long typeId, ItemType itemType);
+	@Query(value = "SELECT * FROM clothes WHERE Id = ?1 AND amount > 0 ", nativeQuery = true)
+	Clothes findByTypeId(Long typeId);
 }

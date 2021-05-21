@@ -34,14 +34,14 @@ public class Receiving {
 	// 상품명 ex)떡볶이
 	@Column(nullable = false, length = 100)
 	private String itemName;
-	
+		
 	// 암호화 이름 ex)123떡볶이
 	@Column(nullable = false, length = 100)
 	private String secretName;
 	
 	// 요청 갯수 ex ) 100개 요청
 	@Column(nullable = false, length = 100)
-	private Long receiving;
+	private Long reqReceiving;
 	
 	@CreationTimestamp
 	private Timestamp createDate;

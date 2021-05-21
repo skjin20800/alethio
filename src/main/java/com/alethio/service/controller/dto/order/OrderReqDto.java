@@ -1,7 +1,8 @@
 package com.alethio.service.controller.dto.order;
 
-import com.alethio.service.domain.item.ItemType;
-import com.alethio.service.domain.order.Order;
+import com.alethio.service.domain.order.Orders;
+import com.alethio.service.domain.order.info.ContactInfo;
+import com.alethio.service.domain.order.info.Items;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,22 +11,15 @@ import lombok.Data;
 @Builder
 public class OrderReqDto {
 
-	private String username;
-	private String email;
-	private String mobile;
-	
-	private ItemType itemType;
-	private Long typeId;	
-	
-	public Order toEntity() {
+	private ContactInfo contactInfo;
+	private Items items;
 
-		return Order.builder()
-				.username(username)
-				.email(email)
-				.mobile(mobile)
-				.itemType(itemType)
-				.typeId(typeId)
-				.build();			
+	//요청 Entity변환 및 trim하기
+	public Orders toEntity() {
+		return Orders.builder()
+				.contactInfo(contactInfo.toEntity())
+				.items(items.toEntity())
+				.build();
 	}
-	
+
 }

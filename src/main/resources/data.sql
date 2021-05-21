@@ -1,0 +1,2 @@
+insert into food(id, itemName, amount, createDate, updateDate) values (1, '떡볶이', 100, now(), now());
+insert into clothes(id, itemName, amount,  createDate, updateDate) values (1, 'A청바지', 100, now(), now());
