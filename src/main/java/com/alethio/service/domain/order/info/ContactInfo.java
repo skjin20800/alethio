@@ -2,11 +2,15 @@ package com.alethio.service.domain.order.info;
 
 import javax.persistence.Embeddable;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public class ContactInfo {
 	 
 	private String contactName;	

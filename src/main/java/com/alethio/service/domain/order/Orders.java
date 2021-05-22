@@ -44,15 +44,6 @@ public class Orders {
 	 
 		//요청 Entity변환 및 trim하기
 	 
-
-//		public Receiving toReceiving() {
-//			return Receiving.builder()
-//					.itemType(items.getItemType())
-//					.itemName(items.)
-//					.contactInfo(contactInfo.toEntity())
-//					.items(items.toEntity())
-//					.build();
-//		}
 	 
 	
 }

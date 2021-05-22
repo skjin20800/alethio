@@ -4,11 +4,15 @@ import com.alethio.service.domain.order.Orders;
 import com.alethio.service.domain.order.info.ContactInfo;
 import com.alethio.service.domain.order.info.Items;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderReqDto {
 
 	private ContactInfo contactInfo;

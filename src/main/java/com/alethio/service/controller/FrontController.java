@@ -18,7 +18,7 @@ public class FrontController {
 	private final OrderService orderService;
 
 	@PostMapping("/order")
-	public CMRespDto<?> save(@RequestBody OrderReqDto orderReqDto) {
+	public CMRespDto<?> order(@RequestBody OrderReqDto orderReqDto) {
 		Orders order = orderReqDto.toEntity();
 		return new CMRespDto<>(200, orderService.주문하기(order));
 
