@@ -38,7 +38,7 @@ public class OrderService {
 		} else if (order.getItems().getItemType().equals("clothes")) { 
 			return 옷주문하기(order);
 		} else {
-			return "아이템이 없습니다.";
+			return "아이템 없음";
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class OrderService {
 //		요청 ID로 아이템 select
 		Food food = foodRepository.findById(order.getItems().getId()).orElseThrow(() -> {
 			// 아이템이 없다면 에러 반환
-			return new IllegalArgumentException("아이템이 없습니다.");
+			return new IllegalArgumentException("아이템 없음");
 		});
 //		재고가 없을시 실행
 		if (food.getAmount() <= 0) {
@@ -56,7 +56,7 @@ public class OrderService {
 //		아이템 수량 -1 [update]
 		food.setAmount(food.getAmount() - 1);
 
-//		아이템 수량이 10개이면 입고요청
+//		아이템 수량이 10미만 이면 입고요청
 		if (food.getAmount() < 10) {
 			입고요청(food.getItemName(), order.getItems().getItemType(), 100L,
 					SecretReceiving.ItemNameToAmadon(food.getItemName()));
@@ -69,7 +69,7 @@ public class OrderService {
 	public String 옷주문하기(Orders order) {// 음식주문하기와 같은 로직
 		 //food와 같은코드
 		Clothes clothes = clothesRepository.findById(order.getItems().getId()).orElseThrow(() -> {
-			return new IllegalArgumentException("아이템이 없습니다.");
+			return new IllegalArgumentException("아이템 없음");
 		});
 		if (clothes.getAmount() <= 0) {
 			return "재고가 없습니다.";

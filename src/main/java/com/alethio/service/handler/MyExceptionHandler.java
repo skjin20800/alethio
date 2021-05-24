@@ -22,6 +22,6 @@ public class MyExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public CMRespDto<?> AllException(Exception e) {
 		exceptionList.addExceptionList(e.getMessage());
-		return new CMRespDto<>(-1, "오류 발생"+e.getMessage());
+		return new CMRespDto<>(400, e.getMessage());
 	}	
 }
