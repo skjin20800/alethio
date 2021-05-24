@@ -62,10 +62,10 @@
  ![image](./mdimg/4.png)
 
 API 정보
-![image](./mdimg/4.png)
+![image](./mdimg/5.png)
 
   # H2 접속 정보 
 
 - JDBC URL : jdbc:h2:mem:h2db
-User Name : alethio
-Password : admin 
+- User Name : alethio
+- Password : admin 
