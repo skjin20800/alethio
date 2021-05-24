@@ -21,9 +21,11 @@ public class Clothes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; //
 	
+	// 상품명 ex)A 청바지
 	@Column(nullable = false, length = 100, unique = true)
 	private String itemName;
-		
+	
+	// 현재 상품 수량 ex)57개
 	@Column(nullable = false, length = 100)
 	private Long amount;
 	

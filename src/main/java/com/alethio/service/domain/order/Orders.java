@@ -29,10 +29,12 @@ public class Orders {
 	@Id //Primary Key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-		
+	
+	// 주문 고객 정보
 	@Embedded
 	 private ContactInfo contactInfo;
 	
+	// 주문 정보
 	@Embedded
 	 private Items items;	
 	  
@@ -41,9 +43,6 @@ public class Orders {
 	 
 	 @UpdateTimestamp
 	 private Timestamp updateDate;
-	 
-		//요청 Entity변환 및 trim하기
-	 
 	 
 	
 }

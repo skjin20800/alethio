@@ -13,10 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ContactInfo {
 	 
-	private String contactName;	
+	// 고객 아이디
+	private String contactName;
+	
+	// 고객 이메일
 	private String contactEmail;
+	
+	// 고객 폰번호
 	private String mobile;
 	
+	// 고객 정보 trim하는 메서드
 	public ContactInfo toEntity() {
 		
 		this.contactName = contactName.trim();

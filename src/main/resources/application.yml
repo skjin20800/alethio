@@ -11,9 +11,9 @@ spring:
       ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: false
-    properties:
-      hibernate.format_sql: true
+#    show-sql: false   //SQL문 볼때
+#    properties:
+#      hibernate.format_sql: true // 콘솔 가독성 좋게 볼때
 
   jackson:
     serialization:

@@ -3,8 +3,6 @@ package com.alethio.service.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-import javax.persistence.EntityManager;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,14 +18,11 @@ import com.alethio.service.controller.dto.order.OrderReqDto;
 import com.alethio.service.domain.order.Orders;
 import com.alethio.service.domain.order.info.ContactInfo;
 import com.alethio.service.domain.order.info.Items;
-import com.alethio.service.service.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 @Transactional
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
-//@Slf4j
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class FrontControllerIntegreTest {
 
 	@Autowired
@@ -49,13 +44,14 @@ public class FrontControllerIntegreTest {
 		String content = new ObjectMapper().writeValueAsString(order);
 
 		//when(테스트 실행) //ResultAction -> 응답을 받을수있음
+		@SuppressWarnings("deprecation")
 		ResultActions resultAction = mockMvc.perform(post("/order") //get,put,post등
 				.contentType(MediaType.APPLICATION_JSON_UTF8)//던지는타입,contentType("applicaton/json")
 				.content(content)//실제던질데이터
 				.accept(MediaType.APPLICATION_JSON_UTF8));//응답받을 데이터
 		
 		//then (검증)
-		resultAction
+		resultAction		
 		.andExpect(jsonPath("$.statusCode").value("200"))//(status의 결과값을, isCreated로 기대한다)
 		.andExpect(jsonPath("$.msg").value("주문 완료"))//jsonPath - json을 리턴한다.//
 		.andDo(MockMvcResultHandlers.print()); //결과를 콘솔에 보여준다

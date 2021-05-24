@@ -31,70 +31,73 @@ public class OrderService {
 	// 옷 DB
 	private final ClothesRepository clothesRepository;
 
-	@Transactional
 	public String 주문하기(Orders order) {
-
 //		IF문 : order의 ItemType 검사
 		if (order.getItems().getItemType().equals("food")) {
-
-//			요청 ID로 아이템 select
-			Food food = foodRepository.findById(order.getItems().getId()).orElseThrow(() -> {
-				// 아이템이 없다면 에러 반환
-				return new IllegalArgumentException("아이템이 없습니다.");
-			});
-//			재고가 없을시 실행
-			if (food.getAmount() <= 0) {
-				return "재고가 없습니다.";
-			}
-//			아이템 수량 -1 [update]
-			food.setAmount(food.getAmount() - 1);
-
-//			아이템 수량이 10개이면 입고요청
-			if (food.getAmount() == 10) {
-				입고요청(food.getItemName(), order.getItems().getItemType(), 100L,
-						SecretReceiving.ItemNameToAmadon(food.getItemName()));
-			}
-
-		} else if (order.getItems().getItemType().equals("clothes")) {
-//			요청 ID로 아이템 select
-			Clothes clothes = clothesRepository.findById(order.getItems().getId()).orElseThrow(() -> {
-				// 아이템이 없다면 에러 반환
-				return new IllegalArgumentException("아이템이 없습니다.");
-			});
-			
-//			재고가 없을시 실행
-			if (clothes.getAmount() <= 0) {
-				return "재고가 없습니다.";
-			}
-			
-//			아이템 수량 -1 [update]
-			clothes.setAmount(clothes.getAmount() - 1);
-				
-//			아이템 수량이 10개이면 입고요청
-			clothes.setAmount(clothes.getAmount() - 1);
-			if (clothes.getAmount() == 10) {
-				입고요청(clothes.getItemName(), order.getItems().getItemType(), 100L,
-						SecretReceiving.ItemNameToCoumang(clothes.getItemName()));
-			}
+			return 음식주문하기(order);
+		} else if (order.getItems().getItemType().equals("clothes")) { 
+			return 옷주문하기(order);
 		} else {
 			return "아이템이 없습니다.";
 		}
-		// IF문 종료
+	}
+	
+	@Transactional
+	public String 음식주문하기(Orders order) {
+//		요청 ID로 아이템 select
+		Food food = foodRepository.findById(order.getItems().getId()).orElseThrow(() -> {
+			// 아이템이 없다면 에러 반환
+			return new IllegalArgumentException("아이템이 없습니다.");
+		});
+//		재고가 없을시 실행
+		if (food.getAmount() <= 0) {
+			return "재고가 없습니다.";
+		}
+//		아이템 수량 -1 [update]
+		food.setAmount(food.getAmount() - 1);
 
-//		주문 insert		
-		orderRepository.save(order);
-		return "주문 완료";
+//		아이템 수량이 10개이면 입고요청
+		if (food.getAmount() < 10) {
+			입고요청(food.getItemName(), order.getItems().getItemType(), 100L,
+					SecretReceiving.ItemNameToAmadon(food.getItemName()));
+		}
+				orderRepository.save(order);
+				return "주문 완료";
+	}
+	
+	@Transactional
+	public String 옷주문하기(Orders order) {// 음식주문하기와 같은 로직
+		 //food와 같은코드
+		Clothes clothes = clothesRepository.findById(order.getItems().getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("아이템이 없습니다.");
+		});
+		if (clothes.getAmount() <= 0) {
+			return "재고가 없습니다.";
+		}
+		clothes.setAmount(clothes.getAmount() - 1);
+		if (clothes.getAmount() < 10) {
+			입고요청(clothes.getItemName(), order.getItems().getItemType(), 100L,
+					SecretReceiving.ItemNameToCoumang(clothes.getItemName()));
+		}
+				orderRepository.save(order);
+				return "주문 완료";
 	}
 
+
+	//인자로 받은 요청값을 DB에 insert하는 메서드
 	@Transactional
 	public void 입고요청(String itemName, String itemType, Long ReqReceiving, String SecretName) {
-		Receiving receiving = new Receiving();
-		receiving.setItemName(itemName);
-		receiving.setItemType(itemType);
-		receiving.setReqReceiving(100L);
-		receiving.setSecretName(SecretName);
-		receivingRepository.save(receiving);
-
-	}
-
+		// 입고 처리가 되어있는지 검사 (중복 입고 방지)
+		Receiving entityReceiving = receivingRepository.findByItemName(itemName);
+		
+		//If 미입고 상태시 수행
+		if(entityReceiving == null) {
+			Receiving receiving = new Receiving();
+			receiving.setItemName(itemName);
+			receiving.setItemType(itemType);
+			receiving.setReqReceiving(100L);
+			receiving.setSecretName(SecretName);
+			receivingRepository.save(receiving);	
+		}		
+	}	
 }
