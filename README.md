@@ -1,3 +1,4 @@
+
 # 알레시오 쇼핑몰 api 구현
 
 안녕하세요. 
@@ -51,30 +52,30 @@
 ### POST
 요청주소 : http://localhost:8080/order
 
-<br>
-기본 요청 주문 요청
 
-Food
+### 기본 요청 주문 요청
+
+#### Food
 
  ![image](./mdimg/1.png)
 <br>
 
-Clothes
+#### Clothes
 
  ![image](./mdimg/2.png)
-
 <br>
-재고 0개이하
+
+#### 재고 0개이하
 
 ![image](./mdimg/3.png)
-
 <br>
-다른 아이디 
+
+#### 다른 아이디 
 
  ![image](./mdimg/4.png)
-
 <br>
-API 정보
+
+####  API 정보
 
 ![image](./mdimg/5.png)
 
