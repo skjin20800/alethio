@@ -51,18 +51,31 @@
 ### POST
 요청주소 : http://localhost:8080/order
 
-- 기본 요청 주문 요청
+<br>
+기본 요청 주문 요청
+
+Food
 
  ![image](./mdimg/1.png)
+<br>
+
+Clothes
+
  ![image](./mdimg/2.png)
 
-- 재고 0개이하
+<br>
+재고 0개이하
+
 ![image](./mdimg/3.png)
 
-- 다른 아이디 
+<br>
+다른 아이디 
+
  ![image](./mdimg/4.png)
 
+<br>
 API 정보
+
 ![image](./mdimg/5.png)
 
   # H2 접속 정보 
