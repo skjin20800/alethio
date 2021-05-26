@@ -51,8 +51,7 @@ public class FrontControllerIntegreTest {
 				.accept(MediaType.APPLICATION_JSON_UTF8));//응답받을 데이터
 		
 		//then (검증)
-		resultAction		
-		.andExpect(jsonPath("$.statusCode").value("200"))//(status의 결과값을, isCreated로 기대한다)
+		resultAction
 		.andExpect(jsonPath("$.msg").value("주문 완료"))//jsonPath - json을 리턴한다.//
 		.andDo(MockMvcResultHandlers.print()); //결과를 콘솔에 보여준다
 		
