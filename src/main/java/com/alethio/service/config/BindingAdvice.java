@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -19,14 +18,13 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-@Aspect
+@Aspect //공통기능 사용 어노테이션
 public class BindingAdvice {
 
 	private final ExceptionList exceptionList;
 
-	@Transactional
 	@Around("execution(* com.alethio.service.controller..*Controller.*(..))") // controller패키지안의 모든 컨트롤러를 검사한다.
-	public Object validCheck(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+	public Object validCheck(ProceedingJoinPoint proceedingJoinPoint) throws Throwable { //ProceedingJoinPoint는 공통기능이다
 
 		Object[] args = proceedingJoinPoint.getArgs(); //요청받은 함수들을 args저장
 		for (Object arg : args) { //함수크기만큼 반복문 실행
@@ -40,7 +38,7 @@ public class BindingAdvice {
 						// 에러메세지 출력
 						errorMap.put(error.getField(), error.getDefaultMessage());
 					}					
-					return new CMRespDto<>(HttpStatus.BAD_REQUEST.value(), errorMap);
+					return new CMRespDto<>(errorMap.toString().replaceAll("=", " error : "),null);
 				}
 			}
 		}

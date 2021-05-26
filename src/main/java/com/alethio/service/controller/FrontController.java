@@ -2,7 +2,6 @@ package com.alethio.service.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ public class FrontController {
 	@PostMapping("/order")
 	public CMRespDto<?> order(@Valid @RequestBody OrderReqDto orderReqDto, BindingResult bindingResult) {
 		Orders order = orderReqDto.toEntity();
-		return new CMRespDto<>(201, orderService.주문하기(order));
+		return orderService.orderMain(order);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.alethio.service.controller.dto.order;
 
+import javax.persistence.Embedded;
 import javax.validation.constraints.NotNull;
 
 import com.alethio.service.domain.order.Orders;
@@ -19,10 +20,12 @@ public class OrderReqDto {
 	
 	//고객 정보 객체
 	@NotNull(message = "고객 정보를 입력하세요")
+	@Embedded
 	private ContactInfo contactInfo;
 	
 	// 주몬 내용 객체
 	@NotNull(message = "주문 정보를 입력하세요")
+	@Embedded
 	private Items items;
 
 	//Request Entity변환 및 trim하기

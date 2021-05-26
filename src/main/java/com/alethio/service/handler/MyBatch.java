@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alethio.service.domain.exception.MyExceptionRepository;
 
@@ -18,6 +19,7 @@ public class MyBatch {
 	private final MyExceptionRepository exceptionRepository;
 
 	// excute함수는 배열안의 모든 에러를 DB에 저장후 배열을 초기화시킨다.
+	@Transactional
 	@Scheduled(fixedDelay = 1000*60) // 1분마다 실행//Cron 정기적 실행
 	public void excute() {
 		List<String> exList = exceptionList.getExList();
